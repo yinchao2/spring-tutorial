@@ -8,6 +8,9 @@
   <properties>
 		<!-- Spring -->
 		<spring.version>4.1.2.RELEASE</spring.version>
+		
+		<!-- jstl version -->
+		<jstl.version>1.2</jstl.version>
 	</properties>
   
   <version>0.0.1-SNAPSHOT</version>
@@ -51,6 +54,13 @@
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-webmvc</artifactId>
     	<version>${spring.version}</version>
+    </dependency>
+    
+    <!-- jstl -->
+    <dependency>
+    	<groupId>jstl</groupId>
+    	<artifactId>jstl</artifactId>
+    	<version>${jstl.version}</version>
     </dependency>
   </dependencies>
   <build>
