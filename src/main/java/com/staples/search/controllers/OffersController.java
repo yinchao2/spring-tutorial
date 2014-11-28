@@ -17,10 +17,15 @@ public class OffersController {
 		this.offersService = offersService;
 	}
 
-	@RequestMapping("/")
-	public String showHome(Model model) {
+	@RequestMapping("/offers")
+	public String showOffers(Model model) {
 		model.addAttribute("offers", offersService.getOffers());
-		return "home";
+		return "offers";
+	}
+	
+	@RequestMapping("/createoffer")
+	public String creatOffer() {
+		return "createoffer";
 	}
 
 }
