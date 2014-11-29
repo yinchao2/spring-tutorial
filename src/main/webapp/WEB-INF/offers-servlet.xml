@@ -12,9 +12,13 @@
 
 	<mvc:annotation-driven></mvc:annotation-driven>
 
+	<!-- jsp view resolver -->
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsps/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	
+	<!-- static resource mapping (css, image, js etc) -->
+	<mvc:resources location="/resources/" mapping="/static/**" />
 </beans>

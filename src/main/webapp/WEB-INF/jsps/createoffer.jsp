@@ -4,32 +4,33 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath}/static/css/main.css" rel="stylesheet" type="text/css" />
 <title>create offers</title>
 </head>
 <body>
 
 <form method="post" action="${pageContext.request.contextPath}/docreate">
-	<table border="0">
+	<table border="0" class="formtable">
 		<tr>
-			<td>Name:</td>
-			<td><input type="text" name="name" /></td>
+			<td class="label">Name:</td>
+			<td><input type="text" name="name" class="control" /></td>
 		</tr>
 		
 		<tr>
-			<td>E-mail:</td>
-			<td><input type="email" name="email" /></td>
+			<td class="label">E-mail:</td>
+			<td><input type="email" name="email" class="control" /></td>
 		</tr>
 		
 		<tr>
-			<td>Your offer:</td>
+			<td class="label">Your offer:</td>
 			<td>
-				<textarea name="text" rows="10" cols="10"></textarea>
+				<textarea name="text" rows="10" cols="10" class="control" ></textarea>
 			</td>
 		</tr>
 		
 		<tr>
 			<td></td>
-			<td><input type="submit" value="Create offer" /></td>
+			<td><input type="submit" value="Create offer" class="control" /></td>
 		</tr>
 		
 		
