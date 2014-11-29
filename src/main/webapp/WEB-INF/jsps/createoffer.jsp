@@ -7,6 +7,33 @@
 <title>create offers</title>
 </head>
 <body>
-under construction - create new offers
+
+<form method="post" action="${pageContext.request.contextPath}/docreate">
+	<table border="0">
+		<tr>
+			<td>Name:</td>
+			<td><input type="text" name="name" /></td>
+		</tr>
+		
+		<tr>
+			<td>E-mail:</td>
+			<td><input type="email" name="email" /></td>
+		</tr>
+		
+		<tr>
+			<td>Your offer:</td>
+			<td>
+				<textarea name="text" rows="10" cols="10"></textarea>
+			</td>
+		</tr>
+		
+		<tr>
+			<td></td>
+			<td><input type="submit" value="Create offer" /></td>
+		</tr>
+		
+		
+	</table>
+</form>
 </body>
 </html>
