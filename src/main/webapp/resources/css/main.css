@@ -31,11 +31,11 @@ textarea {
 	margin-left: 10px;
 }
 
-.offers {
+table.offers {
 	padding: 20px;
 	border: 1px solid gray;
 }
 
-.offers tr th {
+table.offers tr th {
 	text-align: left;
 }
