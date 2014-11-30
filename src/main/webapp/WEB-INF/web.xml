@@ -41,6 +41,7 @@
   	<param-name>contextConfigLocation</param-name>
   	<param-value>
   	classpath:com/staples/search/config/dao-context.xml
+  	classpath:com/staples/search/config/service-context.xml
   	</param-value>
   </context-param>
 </web-app>
