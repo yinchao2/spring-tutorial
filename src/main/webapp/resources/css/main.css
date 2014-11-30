@@ -30,3 +30,12 @@ textarea {
 	color: red;
 	margin-left: 10px;
 }
+
+.offers {
+	padding: 20px;
+	border: 1px solid gray;
+}
+
+.offers tr th {
+	text-align: left;
+}

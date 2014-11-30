@@ -42,7 +42,9 @@ public class OffersController {
 		
 		if(result.hasErrors()) {
 			return "createoffer";
-		} 
+		}
+		
+		offersService.create(offer);
 		
 		return "offercreated";
 	}

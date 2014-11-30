@@ -5,18 +5,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Offers</title>
+<title>Current Offers</title>
 </head>
 <body>
 
+<table class="offers">
+<tr>
+	<th>Id</th>
+	<th>Name</th>
+	<th>Email</th>
+	<th>Text</th>
+</tr>
 <c:forEach var="offer" items="${offers}">
-	<p>
-	    Id: <c:out value="offer.id" /><br/>
-	    Name: <c:out value="offer.id" />${offer.name}<br/>
-	    E-mail: <c:out value="offer.id" />${offer.email}<br/>
-	    Text: <c:out value="offer.id" />${offer.text}<br/>
-    </p>
+	<tr>
+		<td><c:out value="${offer.id}" /></td>
+		<td><c:out value="${offer.name}" /></td>
+		<td><c:out value="${offer.email}" /></td>
+		<td><c:out value="${offer.text}" /></td>
+	</tr>
 </c:forEach>
+</table>
+
 
 </body>
 </html>
