@@ -18,5 +18,8 @@
 					password="123456" />
 			</security:user-service>
 		</security:authentication-provider>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="datasource" />
+		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>
