@@ -29,5 +29,7 @@
 			</tr>
 		</table>
 	</form>
+	
+	<p><a href="${pageContext.request.contextPath}/newaccount">Register New User!</a></p>
 </body>
 </html>
