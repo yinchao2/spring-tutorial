@@ -6,7 +6,9 @@
 
 	<security:http auto-config="true">
 		<security:intercept-url pattern="/createoffer" access="ROLE_USER" />
-		<security:form-login login-page="/login" />
+		<security:intercept-url pattern="/docreate" access="ROLE_USER" />
+		<security:form-login login-page="/login"
+			authentication-failure-url="/login?error=true" />
 	</security:http>
 
 	<security:authentication-manager>

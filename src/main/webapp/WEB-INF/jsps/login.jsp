@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <title>Login Page</title>
@@ -9,6 +9,9 @@
 </head>
 <body onload='document.f.j_username.focus();'>
 	<h3>Login with Username and Password</h3>
+	<c:if test="${param.error != null }">
+		<p class="error">Your username and password are not correct.</p>
+	</c:if>
 	<form name='f' action='${pageContext.request.contextPath}/j_spring_security_check'
 		method='POST'>
 		<table class="formtable">
