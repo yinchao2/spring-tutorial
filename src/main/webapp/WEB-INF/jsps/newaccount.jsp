@@ -9,6 +9,7 @@
 <title>create offers</title>
 </head>
 <body>
+<h2>Create New User Account: </h2>
 
 <form:form method="post" action="${pageContext.request.contextPath}/createaccount" commandName="user">
 	<table border="0" class="formtable">
@@ -33,7 +34,7 @@
 		<tr>
 			<td class="label">Password:</td>
 			<td>
-				<form:input type="password" path="password" name="password" class="control" />
+				<form:password path="password" name="password" class="control" />
 				<br/>
 				<form:errors path="password" cssClass="error"></form:errors>
 			</td>
@@ -42,14 +43,14 @@
 		<tr>
 			<td class="label">Confirm password:</td>
 			<td>
-				<form:input type="password" path="password" name="confirmpass" class="control" />
+				<input type="password" name="confirmPassword" class="control" />
 			</td>
 		</tr>
 		
 		
 		<tr>
 			<td></td>
-			<td><input type="submit" value="Register" class="control" /></td>
+			<td><input type="submit" value="Create Account" class="control" /></td>
 		</tr>
 		
 		
