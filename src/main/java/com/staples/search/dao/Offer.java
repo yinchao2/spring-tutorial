@@ -8,13 +8,13 @@ import com.staples.search.validation.ValidEmail;
 
 public class Offer {
 	private int id;
-	@Size(min=5, max=100, message="Must be between 5 and 100 characters")
+	@Size(min=5, max=100)
 	private String name;
 	@NotNull
 	//@Pattern(regexp="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message="Not valid email address")
-	@ValidEmail(min=6, message="Not valid email address.")
+	@ValidEmail(min=6)
 	private String email;
-	@Size(min=5, max=100, message="Must be between 10 and 255 characters")
+	@Size(min=5, max=100)
 	private String text;
 
 	public Offer() {

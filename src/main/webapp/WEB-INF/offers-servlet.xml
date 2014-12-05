@@ -23,4 +23,9 @@
 	<!-- static resource mapping (css, image, js etc) -->
 	<mvc:resources location="/resources/" mapping="/static/**" />
 	
+	<!-- message properties -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+	<property name="basename" value="com.staples.search.messages.messages"></property>
+	</bean>
 </beans>

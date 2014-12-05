@@ -41,7 +41,7 @@ public class LoginController {
 		}
 		// check if username already exist
 		if(userService.exists(user.getUsername())) {
-			result.rejectValue("username", "DuplicateKey.user.username", "This username already exists!");
+			result.rejectValue("username", "DuplicateKey.user.username");
 			return "newaccount";
 		}
 
