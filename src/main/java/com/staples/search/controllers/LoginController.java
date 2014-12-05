@@ -39,9 +39,15 @@ public class LoginController {
 		if(result.hasErrors()) {
 			return "newaccount";
 		}
-		System.out.println("password: " + user.getPassword());
+		// check if username already exist
+		if(userService.exists(user.getUsername())) {
+			result.rejectValue("username", "DuplicateKey.user.username", "This username already exists!");
+			return "newaccount";
+		}
+
 		user.setAuthority("ROLE_USER");
 		user.setEnabled(true);
+		
 		userService.create(user);
 		
 		return "accountcreated";	
