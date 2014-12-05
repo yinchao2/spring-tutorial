@@ -37,7 +37,7 @@ public class LoginController {
 	public String createAccount(@Valid User user, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "createaccount";
+			return "newaccount";
 		}
 		System.out.println("password: " + user.getPassword());
 		user.setAuthority("ROLE_USER");

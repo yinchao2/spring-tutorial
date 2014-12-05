@@ -18,7 +18,7 @@
 			<td>
 				<form:input type="text" name="username" path="username" class="control" />
 				<br/>
-				<form:errors path="username" cssClass="error"></form:errors>
+				<div class="error"><form:errors path="username"></form:errors></div>
 			</td>
 		</tr>
 		
@@ -27,7 +27,7 @@
 			<td>
 				<form:input type="email" path="email" name="email" class="control" />
 				<br/>
-				<form:errors path="email" cssClass="error"></form:errors>
+				<div class="error"><form:errors path="email" cssClass="error"></form:errors></div>
 			</td>
 		</tr>
 		
@@ -36,7 +36,7 @@
 			<td>
 				<form:password path="password" name="password" class="control" />
 				<br/>
-				<form:errors path="password" cssClass="error"></form:errors>
+				<div class="error"><form:errors path="password" cssClass="error"></form:errors></div>
 			</td>
 		</tr>
 		
