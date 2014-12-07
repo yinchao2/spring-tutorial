@@ -27,6 +27,12 @@ public class LoginController {
 		return "login";
 	}
 	
+	@RequestMapping("/admin")
+	public String showAdmin(Model model) {
+		model.addAttribute("users", userService.getAllUsers());
+		return "admin";
+	}
+	
 	@RequestMapping("/loggedout")
 	public String showLoggedOut() {
 		return "loggedout";
