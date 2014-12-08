@@ -15,7 +15,7 @@
 	</context:component-scan>
 	
 	<!-- JNDI data source -->
-	<jee:jndi-lookup jndi-name="jdbc/spring" id="datasource"
+	<jee:jndi-lookup jndi-name="jdbc/spring" id="dataSource"
 		expected-type="javax.sql.DataSource">
 	</jee:jndi-lookup>
 	

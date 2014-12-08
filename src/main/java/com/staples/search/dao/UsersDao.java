@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class UsersDao {
 
 	private NamedParameterJdbcTemplate jdbc;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	public void setDataSource(DataSource jdbc) {
@@ -25,7 +28,13 @@ public class UsersDao {
 	@Transactional
 	public boolean create(User user) {
 		
-		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(user);
+		//BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(user);
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("username", user.getUsername());
+		params.addValue("email", user.getEmail());
+		params.addValue("password", passwordEncoder.encode(user.getPassword()));
+		params.addValue("enabled", user.isEnabled());
+		params.addValue("authority", user.getAuthority());
 		
 		jdbc.update("INSERT INTO users (username, email, password, enabled) VALUES (:username, :email, :password, :enabled)", params);
 		
