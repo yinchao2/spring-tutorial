@@ -16,7 +16,7 @@
 	--> 
 	
 	<security:http use-expressions="true">
-		<security:intercept-url pattern="/admin" access="hasRole('admin')" />
+		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/createoffer" access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreate" access="isAuthenticated()" />
 		<security:intercept-url pattern="/offercreated" access="isAuthenticated()" />
@@ -37,9 +37,9 @@
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:user-service>
-				<security:user name="yinchao" authorities="user"
+				<security:user name="yinchao" authorities="ROLE_USER"
 					password="123456" />
-				<security:user name="root" authorities="admin"
+				<security:user name="root" authorities="ROLE_ADMIN"
 					password="123456" />
 			</security:user-service>
 		</security:authentication-provider>
@@ -49,5 +49,4 @@
 				users-by-username-query='select * from users where binary username = ?;' />
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
 </beans>
