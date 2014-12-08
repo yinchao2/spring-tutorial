@@ -27,6 +27,11 @@ public class LoginController {
 		return "login";
 	}
 	
+	@RequestMapping("/denied")
+	public String showDenied() {
+		return "denied";
+	}
+	
 	@RequestMapping("/admin")
 	public String showAdmin(Model model) {
 		model.addAttribute("users", userService.getAllUsers());
