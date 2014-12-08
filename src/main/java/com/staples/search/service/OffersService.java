@@ -3,6 +3,7 @@ package com.staples.search.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.staples.search.dao.Offer;
@@ -21,7 +22,7 @@ public class OffersService {
 	public List<Offer> getOffers() {
 		return offersDao.getOffers();
 	}
-
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	public void create(Offer offer) {
 		offersDao.create(offer);
 	}
