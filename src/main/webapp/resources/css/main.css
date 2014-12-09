@@ -30,3 +30,18 @@ textarea {
 	color: red;
 	margin-left: 10px;
 }
+
+.valid {
+	font-size: small;
+	color: green;
+	margin-left: 10px;
+}
+
+table.offers {
+	padding: 20px;
+	border: 1px solid gray;
+}
+
+table.offers tr th {
+	text-align: left;
+}

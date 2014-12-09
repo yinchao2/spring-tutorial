@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>offer created</title>
+<title>Insert title here</title>
 </head>
 <body>
-Offer created: <a href="${pageContext.request.contextPath}/offers">click here to view current offers.</a>
+<h2>Access denied!</h2>
 </body>
 </html>
