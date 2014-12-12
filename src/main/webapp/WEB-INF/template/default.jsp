@@ -2,8 +2,10 @@
 
 <html>
   <head>
-	<link href="${pageContext.request.contextPath}/static/css/main.css" rel="stylesheet" type="text/css" />
     <title><tiles:getAsString name="title"/></title>
+    <link href="${pageContext.request.contextPath}/static/css/main.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/script/jquery-2.1.1.min.js"></script>
+    <tiles:insertAttribute name="includes" />
   </head>
   <body>
 		<div class="header">
