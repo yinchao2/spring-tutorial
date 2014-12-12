@@ -45,3 +45,33 @@ table.offers {
 table.offers tr th {
 	text-align: left;
 }
+
+div.footer {
+	font-size: small;
+	color: gray;
+}
+
+div.content {
+	position: relative;
+	padding: 40px;
+}
+
+div.header {
+	position: relative;
+	text-align: center;
+	background-color: red;
+	height: 40px;
+	width: 100%;	
+}
+
+a.title {
+	font-size: 35px;
+	color: white;
+}
+
+a.login {
+	position: absolute;
+	color: white;
+	right: 10px;
+	top: 10px;
+}
