@@ -27,27 +27,19 @@ public class OffersDao {
 	}
 
 	public List<Offer> getOffers() {
-
-		return jdbc.query("SELECT * FROM offers, users WHERE offers.username = users.username AND users.enabled = true", new RowMapper<Offer>() {
-
-			public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {
-				
-				User user = new User();
-				user.setAuthority(rs.getString("authority"));
-				user.setEmail(rs.getString("email"));
-				user.setEnabled(true);
-				user.setName(rs.getString("name"));
-				user.setUsername(rs.getString("username"));
-				
-				Offer offer = new Offer();
-				offer.setId(rs.getInt("id"));
-				offer.setText(rs.getString("text"));
-				offer.setUser(user);
-
-				return offer;
-			}
-
-		});
+		String sql = "SELECT * FROM offers, users "
+				+ "WHERE offers.username = users.username "
+				+ "AND users.enabled = true";
+		return jdbc.query(sql, new OffersRowMapper());
+	}
+	
+	public List<Offer> getOffers(String username) {
+		
+		String sql = "SELECT * FROM offers, users "
+				+ "WHERE offers.username = users.username "
+				+ "AND users.enabled = true "
+				+ "AND offers.username = :username";
+		return jdbc.query(sql, new MapSqlParameterSource("username", username), new OffersRowMapper());
 	}
 	
 	public boolean update(Offer offer) {
@@ -81,28 +73,14 @@ public class OffersDao {
 
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("id", id);
+		
+		String sql = "SELECT * FROM offers, users "
+				+ "WHERE offers.username = users.username "
+				+ "AND users.enabled = true "
+				+ "AND id=:id";
 
-		return jdbc.queryForObject("SELECT * FROM offers, users WHERE offers.username = users.username AND users.enabled = true AND id=:id", params,
-				new RowMapper<Offer>() {
-
-					public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {
-						
-						User user = new User();
-						user.setAuthority(rs.getString("authority"));
-						user.setEmail(rs.getString("email"));
-						user.setEnabled(true);
-						user.setName(rs.getString("name"));
-						user.setUsername(rs.getString("username"));
-						
-						Offer offer = new Offer();
-						offer.setId(rs.getInt("id"));
-						offer.setText(rs.getString("text"));
-						offer.setUser(user);
-
-						return offer;
-					}
-
-				});
+		return jdbc.queryForObject(sql, params,
+				new OffersRowMapper());
 	}
 	
 }
