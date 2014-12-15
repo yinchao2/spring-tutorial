@@ -1,5 +1,7 @@
 package com.staples.search.controllers;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +47,13 @@ public class OffersController {
 	}
 	
 	@RequestMapping(value="/docreate", method=RequestMethod.POST)
-	public String doCreate(@Valid Offer offer, BindingResult result) {
+	public String doCreate(@Valid Offer offer, BindingResult result, Principal principal) {
 		
 		if(result.hasErrors()) {
 			return "createoffer";
 		}
-		
+		String username = principal.getName();
+		offer.getUser().setUsername(username);
 		offersService.create(offer);
 		
 		return "offercreated";	

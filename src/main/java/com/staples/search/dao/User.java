@@ -21,7 +21,8 @@ public class User {
 	private String email;
 	private String authority;
 	private boolean enabled = false;
-	
+	@NotBlank
+	@Size(min=7, max=60)
 	private String name;
 
 	public User() {
