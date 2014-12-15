@@ -82,7 +82,7 @@ public class OffersDao {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("id", id);
 
-		return jdbc.queryForObject("SELECT * FROM offers, users WHERE offers.username = users.username AND id=:id", params,
+		return jdbc.queryForObject("SELECT * FROM offers, users WHERE offers.username = users.username AND users.enabled = true AND id=:id", params,
 				new RowMapper<Offer>() {
 
 					public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {

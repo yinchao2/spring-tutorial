@@ -48,7 +48,7 @@ public class OfferDaoTests {
 	}
 	
 	@Test
-	public void testCreateUser() {
+	public void testOffers() {
 		
 		User user = new User("johnwpurcell", "hellothere", "john@caveofprogramming.com", true, "ROLE_USER", "John Purcell");
 		
@@ -79,6 +79,23 @@ public class OfferDaoTests {
 		List<Offer> empty = offersDao.getOffers();
 		
 		assertEquals("Offers lists should be empty.", 0, empty.size());
+		
+		// get offer with id
+		Offer offer2 = new Offer(user, "this is another test offer");
+		
+		assertTrue("Offer creation should return true", offersDao.create(offer2));
+		
+		List<Offer> offers2 = offersDao.getOffers();
+		for(Offer o: offers2) {
+			Offer retrieveOffer = offersDao.getOffer(o.getId());
+			
+			assertEquals("This should be the same ", o, retrieveOffer);
+		}
+		
+		offersDao.delete(offer2.getId());
+		
+		List<Offer> offer3 = offersDao.getOffers();
+		assertEquals("The number of offers should be 1 ", 1, offer3.size());
 		
 	}
 	

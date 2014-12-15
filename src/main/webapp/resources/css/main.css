@@ -1,14 +1,21 @@
 @CHARSET "US-ASCII";
 
 .formtable {
-	width: 400px;
+	width: 450px;
 	padding: 10px;
 	border: 1px solid blue;
 }
 
 input[type=text] {
 	width: 250px;
-	
+}
+
+input[type=email] {
+	width: 250px;	
+}
+
+input[type=password] {
+	width: 250px;
 }
 
 textarea {
