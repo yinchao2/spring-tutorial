@@ -13,6 +13,15 @@
 		</tr>
 		
 		<tr>
+			<td class="label">Name:</td>
+			<td>
+				<form:input type="text" name="name" path="name" class="control" />
+				<br/>
+				<div class="error"><form:errors path="name"></form:errors></div>
+			</td>
+		</tr>
+		
+		<tr>
 			<td class="label">E-mail:</td>
 			<td>
 				<form:input type="email" path="email" name="email" class="control" />
