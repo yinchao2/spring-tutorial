@@ -21,18 +21,20 @@ public class User {
 	private String email;
 	private String authority;
 	private boolean enabled = false;
+	
+	private String name;
 
 	public User() {
 
 	}
 
-	public User(String username, String password, String email,  boolean enabled, String authority) {
-		super();
+	public User(String username, String password, String email,  boolean enabled, String authority, String name) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.authority = authority;
 		this.enabled = enabled;
+		this.name = name;
 	}
 
 	public String getUsername() {
@@ -75,6 +77,14 @@ public class User {
 		this.enabled = enabled;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -83,6 +93,7 @@ public class User {
 				+ ((authority == null) ? 0 : authority.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + (enabled ? 1231 : 1237);
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -109,6 +120,11 @@ public class User {
 			return false;
 		if (enabled != other.enabled)
 			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -116,5 +132,14 @@ public class User {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", email=" + email
+				+ ", authority=" + authority + ", enabled=" + enabled
+				+ ", name=" + name + "]";
+	}
+
+	
 
 }

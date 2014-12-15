@@ -18,6 +18,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.staples.search.dao.Offer;
 import com.staples.search.dao.OffersDao;
+import com.staples.search.dao.User;
+import com.staples.search.dao.UsersDao;
 
 
 @ActiveProfiles("dev")
@@ -32,6 +34,9 @@ public class OfferDaoTests {
 	private OffersDao offersDao;
 	
 	@Autowired
+	private UsersDao usersDao;
+	
+	@Autowired
 	private DataSource dataSource;
 
 	@Before
@@ -40,13 +45,16 @@ public class OfferDaoTests {
 		
 		jdbc.execute("delete from offers");
 		jdbc.execute("delete from users");
-		jdbc.execute("delete from authorities");
 	}
 	
 	@Test
 	public void testCreateUser() {
+		
+		User user = new User("johnwpurcell", "hellothere", "john@caveofprogramming.com", true, "ROLE_USER", "John Purcell");
+		
+		assertTrue("User creation should return true", usersDao.create(user));
 
-		Offer offer = new Offer("johnwpurcell", "john@caveofprogramming.com", "This is a test offer.");
+		Offer offer = new Offer(user, "This is a test offer.");
 		
 		assertTrue("Offer creation should return true", offersDao.create(offer));
 		
@@ -55,7 +63,7 @@ public class OfferDaoTests {
 		assertEquals("Should be one offer in database.", 1, offers.size());
 		
 		assertEquals("Retrieved offer should match created offer.", offer, offers.get(0));
-		/*
+		
 		// Get the offer with ID filled in.
 		offer = offers.get(0);
 		
@@ -71,7 +79,7 @@ public class OfferDaoTests {
 		List<Offer> empty = offersDao.getOffers();
 		
 		assertEquals("Offers lists should be empty.", 0, empty.size());
-		*/
+		
 	}
 	
 }

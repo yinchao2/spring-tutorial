@@ -6,11 +6,9 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,14 +30,13 @@ public class UsersDao {
 		//BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(user);
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("username", user.getUsername());
+		params.addValue("name", user.getName());
 		params.addValue("email", user.getEmail());
 		params.addValue("password", passwordEncoder.encode(user.getPassword()));
 		params.addValue("enabled", user.isEnabled());
 		params.addValue("authority", user.getAuthority());
 		
-		jdbc.update("INSERT INTO users (username, email, password, enabled) VALUES (:username, :email, :password, :enabled)", params);
-		
-		return jdbc.update("INSERT INTO authorities (username, authority) VALUES (:username, :authority)", params) == 1;
+		return jdbc.update("INSERT INTO users (username, name, email, password, enabled, authority) VALUES (:username, :name, :email, :password, :enabled, :authority)", params) == 1;
 	}
 	
 	// check if username already exist
@@ -49,7 +46,7 @@ public class UsersDao {
 	}
 
 	public List<User> getAllUsers() {
-		return jdbc.query("SELECT * FROM users, authorities WHERE users.username = authorities.username", BeanPropertyRowMapper.newInstance(User.class));
+		return jdbc.query("SELECT * FROM users", BeanPropertyRowMapper.newInstance(User.class));
 	}
 	
 	
