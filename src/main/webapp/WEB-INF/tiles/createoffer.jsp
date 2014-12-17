@@ -16,7 +16,7 @@
 		
 		<tr>
 			<td></td>
-			<td><input type="submit" value="Create offer" class="control" /></td>
+			<td><input type="submit" value="Save offer" class="control" /></td>
 		</tr>
 	</table>
 </form:form>

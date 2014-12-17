@@ -41,8 +41,21 @@ public class OffersController {
 	}
 	
 	@RequestMapping("/createoffer")
-	public String creatOffer(Model model) {
-		model.addAttribute("offer", new Offer());
+	public String creatOffer(Model model, Principal principal) {
+		
+		Offer offer = null;
+		// if you has offer, get text and place it in edit form
+		if(principal != null) {
+			String username = principal.getName();
+			
+			offer = offersService.getOffer(username);
+		}
+		
+		if(offer == null) {
+			offer = new Offer();
+		}
+		
+		model.addAttribute("offer", offer);
 		return "createoffer";
 	}
 	

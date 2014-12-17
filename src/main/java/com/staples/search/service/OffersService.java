@@ -30,4 +30,34 @@ public class OffersService {
 	public void throwTestException() {
 		offersDao.getOffer(99999);
 	}
+
+	public boolean hasOffer(String username) {
+		// user does not login
+		if(username == null) {
+			return false;
+		}
+		
+		List<Offer> offers = offersDao.getOffers(username);
+		// user has no offer
+		if(offers.size() == 0) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	public Offer getOffer(String username) {
+		
+		if(username == null) {
+			return null;
+		}
+		
+		List<Offer> offers = offersDao.getOffers(username);
+		
+		// user has no offer
+		if(offers.size() == 0) {
+			return null;
+		}
+		return offers.get(0);
+	}
 }

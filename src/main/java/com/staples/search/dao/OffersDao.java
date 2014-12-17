@@ -82,5 +82,5 @@ public class OffersDao {
 		return jdbc.queryForObject(sql, params,
 				new OffersRowMapper());
 	}
-	
+
 }
