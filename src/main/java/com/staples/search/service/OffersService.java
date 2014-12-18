@@ -64,11 +64,13 @@ public class OffersService {
 	public void saveOrUpdate(Offer offer) {
 		
 		if (offer.getId() != 0) {
-			System.out.println("update: " + offer.getId());
 			offersDao.update(offer);
 		} else {
-			System.out.println("create: " + offer.getId());
 			offersDao.create(offer);
 		}
+	}
+
+	public void delete(int id) {
+		offersDao.delete(id);
 	}
 }

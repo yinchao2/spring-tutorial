@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.staples.search.dao.Offer;
 import com.staples.search.service.OffersService;
@@ -60,19 +61,23 @@ public class OffersController {
 	}
 	
 	@RequestMapping(value="/docreate", method=RequestMethod.POST)
-	public String doCreate(@Valid Offer offer, BindingResult result, Principal principal) {
+	public String doCreate(@Valid Offer offer, @RequestParam(value="delete", required=false) String delete, BindingResult result, Principal principal) {
 		
 		if(result.hasErrors()) {
 			return "createoffer";
 		}
 		
-		String username = principal.getName();
-		offer.getUser().setUsername(username);
-		
-		offersService.saveOrUpdate(offer);
-		//offersService.create(offer);
-		
-		return "offercreated";	
+		if(delete != null) {
+			offersService.delete(offer.getId());
+			return "offerdeleted";
+		} else {
+
+			String username = principal.getName();
+			offer.getUser().setUsername(username);
+			
+			offersService.saveOrUpdate(offer);
+			
+			return "offercreated";	
+		}
 	}
-	
 }
