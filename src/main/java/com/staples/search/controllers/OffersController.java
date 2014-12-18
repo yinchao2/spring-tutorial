@@ -65,9 +65,12 @@ public class OffersController {
 		if(result.hasErrors()) {
 			return "createoffer";
 		}
+		
 		String username = principal.getName();
 		offer.getUser().setUsername(username);
-		offersService.create(offer);
+		
+		offersService.saveOrUpdate(offer);
+		//offersService.create(offer);
 		
 		return "offercreated";	
 	}

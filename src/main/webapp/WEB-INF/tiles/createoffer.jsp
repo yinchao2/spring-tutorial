@@ -3,8 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <form:form method="post" action="${pageContext.request.contextPath}/docreate" commandName="offer">
+	<form:hidden path="id" name="id" />
 	<table border="0" class="formtable">
-		
 		<tr>
 			<td class="label">Your offer:</td>
 			<td>
