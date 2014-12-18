@@ -3,6 +3,22 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script type="text/javascript">
+	
+	function onDeleteClick(event) {
+		var doDelete = confirm("Are you sure you want to delete?");
+		
+		if(doDelete == false) {
+			event.preventDefault();
+		}
+	}
+	
+	function onReady() {
+		$("#delete").click(onDeleteClick);
+	}
+	$(document).ready(onReady);
+</script>
+
 <form:form method="post" action="${pageContext.request.contextPath}/docreate" commandName="offer">
 	<form:hidden path="id" name="id" />
 	<table border="0" class="formtable">
@@ -22,7 +38,7 @@
 		<c:if test="${offer.id != 0}">
 			<tr>
 				<td></td>
-				<td><input type="submit" name=delete value="Delete offer" class="control" /></td>
+				<td><input type="submit" name=delete value="Delete offer" class="control" id="delete"/></td>
 			</tr>
 		</c:if>
 		
