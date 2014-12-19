@@ -20,6 +20,9 @@
 		
 		<!-- apache tiles -->
 		<tiles.version>2.2.2</tiles.version>
+		
+		<!-- slf4j -->
+		<slf4j.version>1.7.5</slf4j.version>
 	</properties>
   
   <version>0.0.1-SNAPSHOT</version>
@@ -151,19 +154,19 @@
     <dependency>
     	<groupId>org.slf4j</groupId>
     	<artifactId>slf4j-api</artifactId>
-    	<version>1.7.5</version>
+    	<version>${slf4j.version}</version>
     </dependency>
     <dependency>
     	<groupId>org.slf4j</groupId>
     	<artifactId>slf4j-jcl</artifactId>
-    	<version>1.7.5</version>
+    	<version>${slf4j.version}</version>
     </dependency>
     
     <!-- junit test -->
     <dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-test</artifactId>
-    	<version>4.1.2.RELEASE</version>
+    	<version>${spring.version}</version>
     </dependency>
     <dependency>
     	<groupId>junit</groupId>
@@ -175,7 +178,17 @@
     	<artifactId>commons-dbcp</artifactId>
     	<version>1.4</version>
     </dependency>
-    
+
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-orm</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.hibernate</groupId>
+    	<artifactId>hibernate-core</artifactId>
+    	<version>4.3.7.Final</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>spring-tutorial</finalName>
