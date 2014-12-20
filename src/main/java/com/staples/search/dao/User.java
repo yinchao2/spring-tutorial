@@ -14,22 +14,27 @@ import com.staples.search.validation.ValidEmail;
 @Table(name="users")
 public class User {
 
-	@NotBlank
-	@Size(min=8, max=15)
-	@Pattern(regexp="^\\w{8,}$")
+	@NotBlank(groups={PersistenceValidationGroup.class, FormValidationGroup.class})
+	@Size(min=8, max=15, groups={PersistenceValidationGroup.class, FormValidationGroup.class})
+	@Pattern(regexp="^\\w{8,}$", groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	@Id
 	private String username;
-	@NotBlank
-	@Pattern(regexp="^\\S+$")
-	@Size(min=8, max=15)
+	
+	@NotBlank(groups={PersistenceValidationGroup.class, FormValidationGroup.class})
+	@Pattern(regexp="^\\S+$", groups={PersistenceValidationGroup.class, FormValidationGroup.class})
+	@Size(min=8, max=15, groups={FormValidationGroup.class})
 	private String password;
-	@ValidEmail
+	
+	@ValidEmail(groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	private String email;
-	private String authority;
-	private boolean enabled = false;
-	@NotBlank
-	@Size(min=7, max=60)
+	
+	@NotBlank(groups={PersistenceValidationGroup.class, FormValidationGroup.class})
+	@Size(min=7, max=60, groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	private String name;
+	
+	private String authority;
+	
+	private boolean enabled = false;
 
 	public User() {
 

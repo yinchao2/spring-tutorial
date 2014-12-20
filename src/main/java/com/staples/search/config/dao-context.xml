@@ -30,6 +30,9 @@
 					<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 					<prop key="hibernate.show_sql">true</prop>
 					<prop key="hibernate.hbm2ddl.auto">update</prop>
+					<prop key="javax.persistence.validation.group.pre-persist">com.staples.search.dao.PersistenceValidationGroup</prop>
+					<prop key="javax.persistence.validation.group.pre-update">com.staples.search.dao.PersistenceValidationGroup</prop>
+					<prop key="javax.persistence.validation.group.pre-remove">com.staples.search.dao.PersistenceValidationGroup</prop>
 				</props>
 			</property>
 		</bean>
