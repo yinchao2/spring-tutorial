@@ -52,7 +52,7 @@ public class OfferDaoTests {
 		
 		User user = new User("johnwpurcell", "hellothere", "john@caveofprogramming.com", true, "ROLE_USER", "John Purcell");
 		
-		assertTrue("User creation should return true", usersDao.create(user));
+		usersDao.create(user);
 
 		Offer offer = new Offer(user, "This is a test offer.");
 		
