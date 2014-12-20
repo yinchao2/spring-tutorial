@@ -1,6 +1,7 @@
 package com.staples.search.test.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -68,6 +69,17 @@ public class UserDaoTests {
 		List<User> users2 = usersDao.getAllUsers();
 		
 		assertEquals("Should be four retrieved users.", 4, users2.size());
+	}
+	
+	@Test
+	public void testUserExist() {
+		
+		usersDao.create(user1);
+		
+		assertTrue("User should be exist", usersDao.exists(user1.getUsername()));
+		
+		assertFalse("User should not be exist", usersDao.exists("xjkjsdfsdfsdfdssf"));
+		
 	}
 
 	
