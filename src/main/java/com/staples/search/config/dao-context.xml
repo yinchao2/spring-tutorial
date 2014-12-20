@@ -47,6 +47,11 @@
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
 		
+		<!-- Hibernate exception translator -->
+		<bean id="exceptionTranslator"
+			class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor">
+		</bean>
+		
 	</beans>
 
 </beans>

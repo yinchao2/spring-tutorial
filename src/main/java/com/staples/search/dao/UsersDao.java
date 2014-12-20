@@ -12,8 +12,10 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Repository
 @Transactional
 @Component("usersDao")
 public class UsersDao {
@@ -48,7 +50,7 @@ public class UsersDao {
 
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers() {
-		return session().createQuery("FROM User").list();
+		return session().createQuery("FROM Userrr").list();
 		//return jdbc.query("SELECT * FROM users", BeanPropertyRowMapper.newInstance(User.class));
 	}
 }
