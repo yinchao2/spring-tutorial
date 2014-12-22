@@ -23,8 +23,8 @@ public class OffersService {
 		return offersDao.getOffers();
 	}
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	public void create(Offer offer) {
-		offersDao.create(offer);
+	public void saveOrUpdate(Offer offer) {
+		offersDao.saveOrUpdate(offer);
 	}
 
 	public void throwTestException() {
@@ -59,15 +59,6 @@ public class OffersService {
 			return null;
 		}
 		return offers.get(0);
-	}
-
-	public void saveOrUpdate(Offer offer) {
-		
-		if (offer.getId() != 0) {
-			offersDao.update(offer);
-		} else {
-			offersDao.create(offer);
-		}
 	}
 
 	public void delete(int id) {
