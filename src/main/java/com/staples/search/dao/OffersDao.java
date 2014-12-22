@@ -1,13 +1,12 @@
 package com.staples.search.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional
 @Component("offersDao")
 public class OffersDao {
 
@@ -26,6 +26,13 @@ public class OffersDao {
 	@Autowired
 	public void setDataSource(DataSource jdbc) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
+	}
+	
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	public Session session() {
+		return sessionFactory.getCurrentSession();
 	}
 
 	public List<Offer> getOffers() {
@@ -50,11 +57,8 @@ public class OffersDao {
 		return jdbc.update("UPDATE offers SET text=:text WHERE id=:id", params) == 1;
 	}
 	
-	public boolean create(Offer offer) {
-		
-		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(offer);
-		
-		return jdbc.update("INSERT INTO offers(username, text) VALUES(:username, :text)", params) == 1;
+	public void create(Offer offer) {
+		session().save(offer);
 	}
 	
 	@Transactional
