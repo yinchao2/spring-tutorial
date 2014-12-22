@@ -1,21 +1,23 @@
 package com.staples.search.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Repository
+@Transactional
 @Component("offersDao")
 public class OffersDao {
 
@@ -25,43 +27,38 @@ public class OffersDao {
 	public void setDataSource(DataSource jdbc) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
+	
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	public Session session() {
+		return sessionFactory.getCurrentSession();
+	}
 
 	public List<Offer> getOffers() {
-
-		return jdbc.query("SELECT * FROM offers", new RowMapper<Offer>() {
-
-			public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Offer offer = new Offer();
-
-				offer.setId(rs.getInt("id"));
-				offer.setName(rs.getString("name"));
-				offer.setText(rs.getString("text"));
-				offer.setEmail(rs.getString("email"));
-
-				return offer;
-			}
-
-		});
+		String sql = "SELECT * FROM offers, users "
+				+ "WHERE offers.username = users.username "
+				+ "AND users.enabled = true";
+		return jdbc.query(sql, new OffersRowMapper());
+	}
+	
+	public List<Offer> getOffers(String username) {
+		
+		String sql = "SELECT * FROM offers, users "
+				+ "WHERE offers.username = users.username "
+				+ "AND users.enabled = true "
+				+ "AND offers.username = :username";
+		return jdbc.query(sql, new MapSqlParameterSource("username", username), new OffersRowMapper());
 	}
 	
 	public boolean update(Offer offer) {
 		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(offer);
 		
-		String sql = "UPDATE offers "
-					+ "SET name=:name, text=:text, email=:email "
-					+ "WHERE id=:id";
-		
-		return jdbc.update(sql, params) == 1;
+		return jdbc.update("UPDATE offers SET text=:text WHERE id=:id", params) == 1;
 	}
 	
-	public boolean create(Offer offer) {
-		
-		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(offer);
-		
-		String sql = "INSERT INTO offers (name, text, email) "
-					+ "VALUES (:name, :text, :email)";
-		
-		return jdbc.update(sql, params) == 1;
+	public void create(Offer offer) {
+		session().save(offer);
 	}
 	
 	@Transactional
@@ -69,10 +66,7 @@ public class OffersDao {
 		
 		SqlParameterSource[] params = SqlParameterSourceUtils.createBatch(offers.toArray());
 		
-		String sql = "INSERT INTO offers (id, name, text, email) "
-					+ "VALUES (:id, :name, :text, :email)";
-		
-		return jdbc.batchUpdate(sql, params);
+		return jdbc.batchUpdate("INSERT INTO offers(username, text) VALUES(:username, :text)", params);
 	}
 	
 	public boolean delete(int id) {
@@ -85,23 +79,14 @@ public class OffersDao {
 
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("id", id);
+		
+		String sql = "SELECT * FROM offers, users "
+				+ "WHERE offers.username = users.username "
+				+ "AND users.enabled = true "
+				+ "AND id=:id";
 
-		return jdbc.queryForObject("SELECT * FROM offers WHERE id=:id", params,
-				new RowMapper<Offer>() {
-
-					public Offer mapRow(ResultSet rs, int rowNum)
-							throws SQLException {
-						Offer offer = new Offer();
-
-						offer.setId(rs.getInt("id"));
-						offer.setName(rs.getString("name"));
-						offer.setText(rs.getString("text"));
-						offer.setEmail(rs.getString("email"));
-
-						return offer;
-					}
-
-				});
+		return jdbc.queryForObject(sql, params,
+				new OffersRowMapper());
 	}
-	
+
 }

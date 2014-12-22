@@ -13,13 +13,6 @@
 
 	<mvc:annotation-driven></mvc:annotation-driven>
 
-	<!-- jsp view resolver -->
-	<bean id="jspViewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsps/"></property>
-		<property name="suffix" value=".jsp"></property>
-	</bean>
-	
 	<!-- static resource mapping (css, image, js etc) -->
 	<mvc:resources location="/resources/" mapping="/static/**" />
 	
@@ -27,5 +20,18 @@
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 	<property name="basename" value="com.staples.search.messages.messages"></property>
+	</bean>
+	
+	<!-- apache tiles -->
+	<bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
+	</bean>
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+	<property name="definitions">
+		<list>
+			<value>/WEB-INF/layouts/default.xml</value>
+		</list>
+	</property>
 	</bean>
 </beans>
