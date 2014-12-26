@@ -7,6 +7,7 @@
 <form:form id="details" method="post" commandName="message">
 
 	<input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}" />
+	<input type="hidden" name="_eventId" value="send" />
 	
 	<table border="0" class="formtable">
 		<tr>

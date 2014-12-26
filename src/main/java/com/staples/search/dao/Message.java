@@ -17,12 +17,7 @@ public class Message implements Serializable {
 	// Sender's email address
 	private String email;
 
-	public Message() {
-		this.subject = "my subject";
-		this.content = "my content";
-		this.name = "my name";
-		this.email = "my email";
-	}
+	public Message() { }
 
 	public Message(int id, String subject, String content, String name,
 			String email) {
