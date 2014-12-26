@@ -9,8 +9,6 @@
 	<input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}" />
 	<input type="hidden" name="_eventId" value="send" />
 	
-	<input type="hidden" name="username" value="yinchao2" />
-	
 	<table border="0" class="formtable">
 		<tr>
 			<td class="label">Your name:</td>

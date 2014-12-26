@@ -11,7 +11,7 @@
 <c:forEach var="offer" items="${offers}">
 	<tr>
 		<td><c:out value="${offer.user.name}" /></td>
-		<td><c:out value="${offer.user.email}" /></td>
+		<td><a href="<c:url value='/message?uid=${offer.username}'/>">contact</a></td>
 		<td><c:out value="${offer.text}" /></td>
 	</tr>
 </c:forEach>
