@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import com.staples.search.validation.ValidEmail;
 
 @Entity
 @Table(name="messages")
@@ -15,14 +18,17 @@ public class Message implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
-	
+	@Size(min=5, max=100)
 	private String subject;
+	@Size(min=5, max=1000)
 	private String content;
 
 	// Name of user sending message
+	@Size(min=8, max=60)
 	private String name;
 
 	// Sender's email address
+	@ValidEmail
 	private String email;
 	
 	private String username;
