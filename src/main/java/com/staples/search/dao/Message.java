@@ -2,12 +2,20 @@ package com.staples.search.dao;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="messages")
 public class Message implements Serializable {
 
 	private static final long serialVersionUID = 7475992700364357508L;
-
+	@Id
+	@GeneratedValue
 	private int id;
-
+	
 	private String subject;
 	private String content;
 
@@ -16,16 +24,18 @@ public class Message implements Serializable {
 
 	// Sender's email address
 	private String email;
+	
+	private String username;
 
 	public Message() { }
 
-	public Message(int id, String subject, String content, String name,
-			String email) {
-		this.id = id;
+	public Message(String subject, String content, String name, String email,
+			String username) {
 		this.subject = subject;
 		this.content = content;
 		this.name = name;
 		this.email = email;
+		this.username = username;
 	}
 
 	public int getId() {
@@ -66,6 +76,14 @@ public class Message implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Override
