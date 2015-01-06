@@ -40,15 +40,18 @@ public class UsersDao {
 	
 	// check if username already exist
 	public boolean exists(String username) {
-		Criteria crit = session().createCriteria(User.class);
-		crit.add(Restrictions.eq("username", username));
-		User user = (User) crit.uniqueResult();
-		return user != null;
+		return getUser(username) != null;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers() {
 		return session().createQuery("FROM User").list();
 		//return jdbc.query("SELECT * FROM users", BeanPropertyRowMapper.newInstance(User.class));
+	}
+	
+	public User getUser(String username) {
+		Criteria crit = session().createCriteria(User.class);
+		crit.add(Restrictions.eq("username", username));
+		return (User) crit.uniqueResult();
 	}
 }

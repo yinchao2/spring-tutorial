@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<h2>Send message:</h2>
 <form:form id="details" method="post" commandName="message">
 
 	<input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}" />
@@ -13,7 +13,7 @@
 		<tr>
 			<td class="label">Your name:</td>
 			<td>
-				<form:input type="text" name="name" path="name" class="control" />
+				<form:input type="text" name="name" path="name" class="control" value="${fromName}"/>
 				<br/>
 				<div class="error"><form:errors path="name"></form:errors></div>
 			</td>
@@ -22,7 +22,7 @@
 		<tr>
 			<td class="label">Your e-mail:</td>
 			<td>
-				<form:input type="email" name="email" path="email" class="control" />
+				<form:input type="email" name="email" path="email" class="control" value="${fromEmail}"/>
 				<br/>
 				<div class="error"><form:errors path="email"></form:errors></div>
 			</td>
