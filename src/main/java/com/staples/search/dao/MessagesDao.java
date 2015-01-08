@@ -56,7 +56,4 @@ public class MessagesDao {
 
 		return (Message)crit.uniqueResult();
 	}
-	
-	
-
 }

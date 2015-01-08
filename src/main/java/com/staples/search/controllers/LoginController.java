@@ -1,6 +1,10 @@
 package com.staples.search.controllers;
 
-import javax.validation.Valid;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,19 +13,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.staples.search.dao.FormValidationGroup;
+import com.staples.search.dao.Message;
 import com.staples.search.dao.User;
 import com.staples.search.service.UsersService;
 
 @Controller
 public class LoginController {
 	
-	private UsersService userService;
+	private UsersService usersService;
 	
 	@Autowired
 	public void setUserService(UsersService userService) {
-		this.userService = userService;
+		this.usersService = userService;
 	}
 
 	@RequestMapping("/login")
@@ -36,7 +42,7 @@ public class LoginController {
 	
 	@RequestMapping("/admin")
 	public String showAdmin(Model model) {
-		model.addAttribute("users", userService.getAllUsers());
+		model.addAttribute("users", usersService.getAllUsers());
 		return "admin";
 	}
 	
@@ -58,7 +64,7 @@ public class LoginController {
 			return "newaccount";
 		}
 		// check if username already exist
-		if(userService.exists(user.getUsername())) {
+		if(usersService.exists(user.getUsername())) {
 			result.rejectValue("username", "DuplicateKey.user.username");
 			return "newaccount";
 		}
@@ -66,8 +72,30 @@ public class LoginController {
 		user.setAuthority("ROLE_USER");
 		user.setEnabled(true);
 		
-		userService.create(user);
+		usersService.create(user);
 		
 		return "accountcreated";	
 	}
+	
+	@RequestMapping(value="/getmessages", method=RequestMethod.GET, produces="application/json")
+	@ResponseBody
+	public Map<String, Object> getMessages(Principal principal) {
+		
+		List<Message> messages = null;
+		
+		if(principal == null) {
+			messages = new ArrayList<Message>();
+		}
+		else {
+			String username = principal.getName();
+			messages = usersService.getMessages(username);
+		}
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("messages", messages);
+		data.put("number", messages.size());
+		
+		return data;
+	}
+	
 }
