@@ -1,5 +1,7 @@
 package com.staples.search.dao;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,7 +14,9 @@ import com.staples.search.validation.ValidEmail;
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Serializable {
+	
+	private static final long serialVersionUID = -5973266821436751146L;
 
 	@NotBlank(groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	@Size(min=8, max=15, groups={PersistenceValidationGroup.class, FormValidationGroup.class})

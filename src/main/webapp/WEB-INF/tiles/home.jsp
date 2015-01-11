@@ -11,23 +11,26 @@
 <c:forEach var="offer" items="${offers}">
 	<tr>
 		<td><c:out value="${offer.user.name}" /></td>
-		<td><c:out value="${offer.user.email}" /></td>
+		<td><a href="<c:url value='/message?uid=${offer.username}'/>">contact</a></td>
 		<td><c:out value="${offer.text}" /></td>
 	</tr>
 </c:forEach>
 </table>
 
-<p><a href="${pageContext.request.contextPath}/createoffer">
-	<c:choose>
-		<c:when test="${hasOffer}">
-			Edit or delete offer
-		</c:when>
-		<c:otherwise>
-			create new an offer
-		</c:otherwise>
-	</c:choose>
-</a></p>
+<script type="text/javascript">
+	
+	function updateMessageLink(data) {
+		$("#numberMessages").text(data.number);
+	}
+	
+	function onLoad() {
+		updatePage();
+		window.setInterval(updatePage, 5000);
+	}
+	
+	function updatePage() {
+		$.getJSON("<c:url value="/getmessages"/>", updateMessageLink);
+	}
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-	<p><a href="<c:url value='/admin'/>">Admin</a></p>
-</sec:authorize>
+	$(document).ready(onLoad);
+</script>
