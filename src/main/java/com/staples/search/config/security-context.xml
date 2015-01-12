@@ -12,6 +12,7 @@
 		<security:intercept-url pattern="/docreate" access="isAuthenticated()" />
 		<security:intercept-url pattern="/offercreated" access="isAuthenticated()" />
 		<security:intercept-url pattern="/getmessages" access="isAuthenticated()" />
+		<security:intercept-url pattern="/messages" access="isAuthenticated()" />
 		<security:form-login login-page="/login"
 			authentication-failure-url="/login?error=true" />
 		<security:logout logout-success-url="/loggedout" />
