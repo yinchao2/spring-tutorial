@@ -12,6 +12,30 @@
 		$("#form" + i).toggle();
 	}
 	
+	function success(data) {
+		$("#form" + data.id).toggle();
+		$("#alert" + data.id).text("Message has been sent!");
+		startTimer();
+	}
+	
+	function error() {
+		alert("error");
+	}
+	
+	function replyMessages(i, name, email) {
+		var text = $("#textbox" + i).val();
+		
+		$.ajax({
+			"type": 'POST',
+			"url": '<c:url value="/replymessages" />',
+			"data": JSON.stringify({"id": i, "text": text, "name": name, "email": email}),
+			"success": success,
+			"error": error,
+			contentType: "application/json",
+			dataType: "json"
+		});
+	}
+	
 	function showMessages(data) {
 		
 		$("#messages").html("");
@@ -47,17 +71,27 @@
 			nameSpan.appendChild(link)
 			nameSpan.appendChild(document.createTextNode(")"))
 			
+			var alertSpan = document.createElement("span");
+			alertSpan.setAttribute("class", "alert");
+			alertSpan.setAttribute("id", "alert" + i);
+			
 			var replyForm = document.createElement("form");
 			replyForm.setAttribute("class", "replyform");
 			replyForm.setAttribute("id", "form" + i);
 			
 			var textarea = document.createElement("textarea");
 			textarea.setAttribute("class", "replyarea");
+			textarea.setAttribute("id", "textbox" + i);
 			
 			var replyButton = document.createElement("input");
 			replyButton.setAttribute("class", "replybutton");
 			replyButton.setAttribute("type", "button");
 			replyButton.setAttribute("value", "Reply");
+			replyButton.onclick = function(j, name, email) {
+				return function() {
+					replyMessages(j, name, email);
+				}
+			}(i, message.name, message.email);
 			
 			replyForm.appendChild(textarea);
 			replyForm.appendChild(replyButton);
@@ -65,6 +99,7 @@
 			messageDiv.appendChild(subjectSpan);
 			messageDiv.appendChild(contentSpan);
 			messageDiv.appendChild(nameSpan);
+			messageDiv.appendChild(alertSpan);
 			messageDiv.appendChild(replyForm);
 			
 			$("#messages").append(messageDiv);

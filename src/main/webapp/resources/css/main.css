@@ -120,3 +120,8 @@ input.replybutton {
 	font-size: medium;
 	border: 1px solid gray;
 }
+
+span.alert {
+	display: block;
+	color: green;
+}
