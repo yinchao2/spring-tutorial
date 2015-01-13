@@ -103,3 +103,19 @@ span.name {
 	color: brown;
 	font-size: medium;
 }
+
+form.replyform {
+	padding: 20px;
+}
+
+textarea.replyarea {
+	width: 350px;
+	height: 200px;
+}
+
+input.replybutton {
+	margin-top: 5px;
+	display: block;
+	font-size: medium;
+	border: 1px solid gray;
+}

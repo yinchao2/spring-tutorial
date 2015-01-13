@@ -30,9 +30,24 @@
 			
 			nameSpan.appendChild(document.createTextNode(message.name + " (" + message.email + ")"));
 			
+			var replyForm = document.createElement("form");
+			replyForm.setAttribute("class", "replyform");
+			
+			var textarea = document.createElement("textarea");
+			textarea.setAttribute("class", "replyarea");
+			
+			var replyButton = document.createElement("input");
+			replyButton.setAttribute("class", "replybutton");
+			replyButton.setAttribute("type", "button");
+			replyButton.setAttribute("value", "Reply");
+			
+			replyForm.appendChild(textarea);
+			replyForm.appendChild(replyButton);
+			
 			messageDiv.appendChild(subjectSpan);
 			messageDiv.appendChild(contentSpan);
 			messageDiv.appendChild(nameSpan);
+			messageDiv.appendChild(replyForm);
 			
 			$("#messages").append(messageDiv);
 		}
@@ -45,7 +60,7 @@
 	
 	function onLoad() {
 		updatePage();
-		window.setInterval(updatePage, 5000);
+		window.setInterval(updatePage, 50000);
 	}
 	
 	$(document).ready(onLoad);
