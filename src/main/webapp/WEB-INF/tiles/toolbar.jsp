@@ -13,7 +13,7 @@
 </a>
 &nbsp;
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-	<p><a href="<c:url value='/admin'/>">Admin</a></p>
+	<a href="<c:url value='/admin'/>">Admin</a>
 </sec:authorize>
 &nbsp;
 <sec:authorize access="isAuthenticated()">

@@ -14,7 +14,7 @@
 		<security:intercept-url pattern="/getmessages" access="isAuthenticated()" />
 		<security:intercept-url pattern="/messages" access="isAuthenticated()" />
 		<security:form-login login-page="/login"
-			authentication-failure-url="/login?error=true" />
+			authentication-failure-url="/login?error=true" authentication-success-handler-ref="successRedirect" />
 		<security:logout logout-success-url="/loggedout" />
 		<security:access-denied-handler error-page="/denied" />
 		<security:remember-me key="offersAppKey"
@@ -37,4 +37,6 @@
 	<bean id="passwordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 	</bean>
+	
+	<bean id="successRedirect" class="com.staples.search.controllers.RedirectHandler"></bean>
 </beans>
